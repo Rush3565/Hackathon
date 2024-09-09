@@ -30,7 +30,9 @@ router.post('/generatetimetable', async (req, res) => {
 
   let timetable = [];
   courses.forEach(course => {
-    const availableFaculty = faculty.find(fac => fac._id.equals(course.faculty_id) && fac.availability.length);
+    // const availableFaculty = faculty.find(fac => fac._id.equals(course.faculty_id) && fac.availability.length);
+    // const availableRoom = rooms.find(room => room.availability.length);
+    const availableFaculty = faculty.find(fac => fac.availability.length);
     const availableRoom = rooms.find(room => room.availability.length);
 
     if (availableFaculty && availableRoom) {
@@ -38,15 +40,15 @@ router.post('/generatetimetable', async (req, res) => {
         course: course.name,
         faculty: availableFaculty.name,
         room: availableRoom.name,
-        time: availableFaculty.availability.shift(), // Assign a time and remove it from availability
+        time: availableFaculty.availability.shift(),
       });
-      availableRoom.availability.shift(); // Remove time slot from room availability
+      availableRoom.availability.shift();
     }
-  });
+  }
+);
+
 
   res.send(timetable);
 });
 
 module.exports = router;
-
-
