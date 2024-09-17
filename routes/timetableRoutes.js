@@ -1,4 +1,4 @@
-//created by yash talsaniya 😉
+
 
 const express = require('express');
 const Faculty = require('../models/Faculty');
